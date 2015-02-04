@@ -255,7 +255,7 @@ public class BtManager extends Service
 //                mHandler.sendMessage(tag);
 //                mainCallbackContext.success("Not connected");
                 mHandler.obtainMessage(BluetoothSerialTWA.MESSAGE_READ, tag).sendToTarget();
-                mainCallbackContext.success("Not connected");
+//                mainCallbackContext.success("Not connected");
                 
 //                mHandler.onTagReaded(tag);
 //		Intent i = new Intent(ACTION);
