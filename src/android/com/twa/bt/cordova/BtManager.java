@@ -62,6 +62,7 @@ public class BtManager extends Service
 	private boolean autoSave;
 	private static final boolean DEBUG = false;
         private Handler mHandler;
+        private CallbackContext mainCallbackContext;
 
 	public static int count;
 
@@ -73,12 +74,13 @@ public class BtManager extends Service
 	 * @param ctx
 	 *            the ctx
 	 */
-	public boolean connect(Handler handler, CallbackContext callbackContext, String mac)
+	public boolean connect(Handler handler, CallbackContext cbContext, String mac)
 	{
 //		Intent i = new Intent(ACTION);
 //		i.putExtra(STATUS, CONNECTING);
 //		sendBroadcast(i);
             
+            mainCallbackContext = cbContext;
             mHandler = handler;
             
 //		String mac = PreferenceManager.getDefaultSharedPreferences(this)
@@ -128,11 +130,11 @@ public class BtManager extends Service
 
 			Log.e("SERVICE", "CONNECTED");
 
-			doStart(callbackContext);
+			doStart();
 
 		} catch (IOException e)
 		{
-                        callbackContext.error("Not connected");
+                        mainCallbackContext.error("Not connected");
 			e.printStackTrace();
 			try
 			{
@@ -162,7 +164,7 @@ public class BtManager extends Service
 	 * @param in
 	 *            the input stream
 	 */
-	public void startListen(final InputStream in, CallbackContext callbackContext)
+	public void startListen(final InputStream in)
 	{
 		Log.e("SERVICE", "LISTEN" + socket);
 		LIST.clear();
@@ -216,7 +218,7 @@ public class BtManager extends Service
 					}
 					catch (IOException e)
 					{
-                                                callbackContext.error("Not connected");
+                                                mainCallbackContext.error("Not connected");
 						socket=null;
 						e.printStackTrace();
 						stopSelf();
@@ -224,7 +226,7 @@ public class BtManager extends Service
 					}
 					catch (Exception e)
 					{
-                                            callbackContext.error("Not connected");
+                                            mainCallbackContext.error("Not connected");
                                             e.printStackTrace();
 					}
 				}
@@ -432,7 +434,7 @@ public class BtManager extends Service
 		}
 	};
 
-	private void doStart(CallbackContext callbackContext)
+	private void doStart()
 	{
 		Log.e("SERVICE", "STARt" + socket);
 		try
@@ -444,7 +446,7 @@ public class BtManager extends Service
 			}
 		} catch (IOException e)
 		{
-			e.printStackTrace(callbackContext);
+			e.printStackTrace();
 			stopSelf();
 		}
 
