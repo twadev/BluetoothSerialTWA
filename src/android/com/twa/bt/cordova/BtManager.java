@@ -123,6 +123,7 @@ public class BtManager extends Service
 		{
 			Log.e("SERVICE", "CONNECTING");
 			socket.connect();
+                        mainCallbackContext.success("Not connected");
 
 //			i = new Intent(ACTION);
 //			i.putExtra(STATUS, CONNECTED);
@@ -253,7 +254,9 @@ public class BtManager extends Service
 //                bundle.putString(BluetoothSerial.DEVICE_NAME, device.getName());
 //                msg.setData(bundle);
 //                mHandler.sendMessage(tag);
+                mainCallbackContext.success("Not connected");
                 mHandler.obtainMessage(BluetoothSerialTWA.MESSAGE_READ, tag).sendToTarget();
+                mainCallbackContext.error("Not connected");
                 
 //                mHandler.onTagReaded(tag);
 //		Intent i = new Intent(ACTION);
