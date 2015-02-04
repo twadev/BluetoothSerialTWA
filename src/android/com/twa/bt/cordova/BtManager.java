@@ -215,6 +215,7 @@ public class BtManager extends Service
 					}
 					catch (IOException e)
 					{
+                                                callbackContext.error("Not connected");
 						socket=null;
 						e.printStackTrace();
 						stopSelf();
@@ -222,7 +223,8 @@ public class BtManager extends Service
 					}
 					catch (Exception e)
 					{
-						e.printStackTrace();
+                                            callbackContext.error("Not connected");
+                                            e.printStackTrace();
 					}
 				}
 			}
