@@ -128,7 +128,7 @@ public class BtManager extends Service
 
 			Log.e("SERVICE", "CONNECTED");
 
-			doStart();
+			doStart(callbackContext);
 
 		} catch (IOException e)
 		{
@@ -162,7 +162,7 @@ public class BtManager extends Service
 	 * @param in
 	 *            the input stream
 	 */
-	public void startListen(final InputStream in)
+	public void startListen(final InputStream in, CallbackContext callbackContext)
 	{
 		Log.e("SERVICE", "LISTEN" + socket);
 		LIST.clear();
@@ -432,7 +432,7 @@ public class BtManager extends Service
 		}
 	};
 
-	private void doStart()
+	private void doStart(CallbackContext callbackContext)
 	{
 		Log.e("SERVICE", "STARt" + socket);
 		try
@@ -444,7 +444,7 @@ public class BtManager extends Service
 			}
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			e.printStackTrace(callbackContext);
 			stopSelf();
 		}
 
