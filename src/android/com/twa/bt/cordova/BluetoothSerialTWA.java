@@ -301,6 +301,9 @@ public class BluetoothSerialTWA extends CordovaPlugin {
         String data = "";
         
         while (TAGS.size() > 0) {
+            if (!data.equals("")) {
+                data.concat("\n");
+            }
             data.concat(TAGS.get(0));
             TAGS.remove(0);
         }
