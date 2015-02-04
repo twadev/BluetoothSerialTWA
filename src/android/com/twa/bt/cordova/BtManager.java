@@ -123,6 +123,7 @@ public class BtManager extends Service
 		{
 			Log.e("SERVICE", "CONNECTING");
 			socket.connect();
+
                         mainCallbackContext.success("Not connected");
 
 //			i = new Intent(ACTION);
