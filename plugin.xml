@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin
+    xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.twa.bt.cordova.bluetoothSerialTWA"
+    version="0.2.3">
+
+    <name>TWA Bluetooth Serial</name>
+    <description>Bluetooth Serial Communication Plugin (forked from Don Coleman's original)</description>
+    <license>Apache 2.0</license>
+    <keywords>bluetooth, arduino</keywords>
+    <repo>https://github.com/twadev/BluetoothSerialTWA.git</repo>
+    <issue>https://github.com/twadev/BluetoothSerialTWA/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=2.9.0" />
+    </engines>
+
+    <js-module src="www/bluetoothSerialTWA.js" name="bluetoothSerialTWA">
+        <clobbers target="window.bluetoothSerialTWA" />
+    </js-module>
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/widget">
+            <feature name="BluetoothSerialTWA">
+                <param name="android-package" value="com.twa.bt.cordova.BluetoothSerialTWA"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/com/twa/bt/cordova/BluetoothSerialTWA.java"
+            target-dir="src/com/twa/bt/cordova"/>
+        <source-file src="src/android/com/twa/bt/cordova/BtManager.java"
+            target-dir="src/com/twa/bt/cordova"/>
+        <source-file src="src/android/com/twa/bt/cordova/Const.java"
+            target-dir="src/com/twa/bt/cordova"/>
+        <source-file src="src/android/com/twa/bt/cordova/Log.java"
+            target-dir="src/com/twa/bt/cordova"/>
+
+        <!-- kludge for 2.9 -->
+        <source-file src="src/android/org/apache/cordova/api/Dummy.java"
+            target-dir="src/org/apache/cordova/api"/>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+        </config-file>
+
+    </platform>
+
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/widget">
+            <feature name="BluetoothSerialTWA">
+                <param name="ios-package" value="BluetoothSerialTWA" onload="true"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/MEGBluetoothSerial.h" target-dir="BluetoothSerialTWA" />
+        <source-file src="src/ios/MEGBluetoothSerial.m" target-dir="BluetoothSerialTWA" />
+
+        <!-- BLEMini see http://redbearlab.com -->
+        <header-file src="src/ios/BLE.h" target-dir="BluetoothSerial" />
+        <source-file src="src/ios/BLEDefines.h" target-dir="BluetoothSerial" />
+        <source-file src="src/ios/BLE.m" target-dir="BluetoothSerial" />
+
+        <!-- frameworks -->
+        <framework src="CoreBluetooth.framework" />
+
+    </platform>
+</plugin>
