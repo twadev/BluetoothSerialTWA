@@ -177,16 +177,17 @@ public class BtManager extends Service
 					Log.e("SERVICE", "LISTEN=WHILE");
 //					if (DEBUG)
 //					{
-//						try
-//						{
-//							Thread.sleep(10000);
-//						} catch (Exception e)
-//						{
-//							e.printStackTrace();
-//						}
+						try
+						{
+							Thread.sleep(10000);
+						} catch (Exception e)
+						{
+							e.printStackTrace();
+						}
 //						onTagRead(System.currentTimeMillis() + "");
 //						continue;
 //					}
+//							Thread.sleep(10000);
 					try
 					{
 						byte b = (byte) in.read();
